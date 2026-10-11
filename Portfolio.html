@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tech Virtual Assistant | Automation, Web, Video</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#edf0f6;--surface:#fff;--ink:#1b2340;--muted:#59627f;--line:#d3d9e6;
+  --game:#7a4dff;--soft:#0f8b8d;--video:#e8478b;--auto:#d98a00;
+  --display:"Bricolage Grotesque","Trebuchet MS",sans-serif;--body:"Figtree","Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12162a;--surface:#1b2140;--ink:#eef0fa;--muted:#a3abc9;--line:#2f375c;
+  --game:#a58bff;--soft:#3cc4c6;--video:#ff7ab0;--auto:#f2b230;}}
+:root[data-theme="dark"]{--bg:#12162a;--surface:#1b2140;--ink:#eef0fa;--muted:#a3abc9;--line:#2f375c;--game:#a58bff;--soft:#3cc4c6;--video:#ff7ab0;--auto:#f2b230}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(64px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--body)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:6px;align-items:center;overflow-x:auto;height:56px}
+nav b{font:800 1.1rem var(--display);margin-right:auto;white-space:nowrap}
+nav a{text-decoration:none;font-weight:600;font-size:.95rem;padding:6px 12px;border-radius:99px;white-space:nowrap;color:var(--muted)}
+nav a:hover{color:var(--ink);background:var(--surface)}
+.hero{padding:72px 0 56px}
+h1{font:800 clamp(2.6rem,8vw,5.6rem)/.98 var(--display);letter-spacing:-.03em;margin:0 0 20px;max-width:14ch}
+.hero p{max-width:52ch;color:var(--muted);font-size:1.2rem;margin:0 0 28px}
+.bench{display:flex;flex-wrap:wrap;gap:10px}
+.bench a{--c:var(--game);text-decoration:none;font-weight:600;padding:10px 16px;border-radius:12px;background:var(--surface);border:2px solid var(--c);display:flex;gap:10px;align-items:center}
+.bench a::before{content:"";width:12px;height:12px;border-radius:3px;background:var(--c)}
+.bench a:hover{background:var(--c);color:#fff}
+section{padding:48px 0;border-top:1px solid var(--line)}
+.sec{--c:var(--game);display:grid;grid-template-columns:200px 1fr;gap:32px}
+.sec header h2{font:800 1.9rem/1.1 var(--display);margin:0 0 10px;letter-spacing:-.02em}
+.sec header p{margin:0;color:var(--muted);font-size:.95rem}
+.sec header::before{content:"";display:block;width:56px;height:8px;border-radius:4px;background:var(--c);margin-bottom:16px}
+.stack{display:grid;gap:20px;min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px;border-left:6px solid var(--c)}
+.card h3{font:800 1.5rem/1.2 var(--display);margin:0 0 8px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.card p{margin:0 0 16px;max-width:62ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;padding:0;list-style:none}
+.chips li{font-size:.85rem;font-weight:500;padding:4px 11px;border-radius:99px;background:var(--bg);border:1px solid var(--line)}
+.btn{display:inline-block;text-decoration:none;font-weight:600;background:var(--c);color:#fff;padding:10px 18px;border-radius:10px}
+[data-theme="dark"] .btn,.dk .btn{color:#12162a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#12162a}}
+.btn:hover{filter:brightness(1.1)}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:0 0 20px;padding:0;list-style:none}
+.flow li{flex:1 1 130px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:.88rem}
+.flow li b{display:block;color:var(--c);font-size:.95rem}
+.videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.thumb{aspect-ratio:16/9;border-radius:12px;background:linear-gradient(135deg,var(--c),var(--ink));display:grid;place-items:center;margin-bottom:16px;text-decoration:none}
+.thumb span{width:64px;height:64px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.thumb span::after{content:"";border-left:20px solid #1b2340;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
+.thumb:hover span{transform:scale(1.08)}
+.badge{font:600 .78rem var(--body);padding:3px 10px;border-radius:99px;background:var(--c);color:#fff}
+.wip{border:2px dashed var(--c);border-left-width:6px}
+.tasks{list-style:none;padding:0;margin:0 0 6px;display:grid;gap:6px}
+.tasks li{display:flex;gap:10px;align-items:center}
+.tasks li::before{content:"";width:16px;height:16px;border-radius:5px;border:2px dashed var(--c);flex:none}
+.bar{height:8px;border-radius:4px;background:var(--bg);overflow:hidden;margin:0 0 16px}
+.bar i{display:block;height:100%;width:45%;background:var(--c);border-radius:4px}
+footer{padding:48px 0 64px;border-top:1px solid var(--line)}
+footer h2{font:800 2rem var(--display);margin:0 0 8px}
+footer p{color:var(--muted);margin:0 0 16px}
+main{display:flex;flex-direction:column}#services{order:1}#automation{order:2}#software{order:3}#video{order:4}#games{order:5}
+.sh{font:800 1.9rem/1.1 var(--display);letter-spacing:-.02em;margin:0 0 20px}
+.svcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.svc{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);border-radius:14px;padding:20px}
+.svc h3{font:800 1.2rem/1.2 var(--display);margin:0 0 8px}.svc p{margin:0;color:var(--muted);font-size:.97rem}
+@media (max-width:760px){.sec{grid-template-columns:1fr;gap:20px}.hero{padding:44px 0 36px}.card{padding:20px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media (prefers-reduced-motion:no-preference){.hero h1,.hero p,.bench{animation:in .6s both}.hero p{animation-delay:.1s}.bench{animation-delay:.2s}@keyframes in{from{opacity:0;transform:translateY(14px)}}}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><b>Clarc Magbujos</b>
+<a href="#services">Services</a><a href="#automation">Automation</a><a href="#software">Web & software</a><a href="#video">Video</a><a href="#games">Games</a><a href="#contact">Hire me</a></div></nav>
+
+<main class="wrap">
+<div class="hero">
+  <h1>Tech virtual assistant for automations, web builds and video edits.</h1>
+  <p>I set up the systems that handle repeat work: email replies, chatbots, dashboards and edited content. Below are real projects I've built.</p><p><a class="btn" style="--c:var(--ink)" href="#contact">Hire me</a></p>
+  <div class="bench">
+    <a href="#games" style="--c:var(--game)">Game development</a>
+    <a href="#software" style="--c:var(--soft)">Software development</a>
+    <a href="#video" style="--c:var(--video)">Video editing</a>
+    <a href="#automation" style="--c:var(--auto)">Workflow automation</a>
+  </div>
+</div>
+
+<section id="services">
+<h2 class="sh">What I can take off your plate</h2>
+<div class="svcs">
+<div class="svc" style="--c:var(--auto)"><h3>Workflow automation</h3><p>Auto-replies, chatbots and routine messages set up in n8n so they run on their own.</p></div>
+<div class="svc" style="--c:var(--soft)"><h3>Web and software</h3><p>Dashboards, small web tools and VPS hosting set-up, plus AI and computer vision builds.</p></div>
+<div class="svc" style="--c:var(--video)"><h3>Video editing</h3><p>Edits in CapCut or Adobe Premiere, depending on what the project needs.</p></div>
+<div class="svc" style="--c:var(--game)"><h3>Game development</h3><p>Playable game builds with original mechanics, published on itch.io.</p></div>
+</div>
+<p style="color:var(--muted);margin:28px 0 10px">Tools I work with</p>
+<ul class="chips"><li>n8n</li><li>Gmail</li><li>Gemini</li><li>Facebook Messenger</li><li>PHP</li><li>JavaScript</li><li>Bootstrap</li><li>Python</li><li>Raspberry Pi</li><li>Hostinger VPS</li><li>Roboflow</li><li>Google Colab</li><li>CapCut</li><li>Unity</li><li>Adobe Premiere</li></ul>
+</section>
+
+<section id="games"><div class="sec" style="--c:var(--game)">
+  <header><h2>Game development</h2><p>Proof I can take a creative project from idea to public release.</p></header>
+  <div class="stack"><article class="card">
+    <h3>Faeriedale</h3>
+    <p>A game with our own twist on rock-paper-scissors mechanics. Built with Pastille Studios and playable on itch.io.</p>
+    <a class="btn" href="https://pastillestudios.itch.io/faeriedale" target="_blank" rel="noopener">Play on itch.io</a>
+  </article></div>
+</div></section>
+
+<section id="software"><div class="sec" style="--c:var(--soft)">
+  <header><h2>Software development</h2><p>Web dashboards, hosting and hardware set-ups, built end to end.</p></header>
+  <div class="stack"><article class="card">
+    <h3>Pisys: Fish Detection and Identification System</h3>
+    <p>A system that uses a computer vision model to detect and identify fish species. An underwater camera sends footage to a Raspberry Pi that runs the model, and results show up on a web dashboard.</p>
+    <ol class="flow">
+      <li><b>Capture</b>Underwater camera module</li>
+      <li><b>Detect</b>YOLOv8 model hosted on Raspberry Pi</li>
+      <li><b>Display</b>Web dashboard on a Hostinger VPS</li>
+    </ol>
+    <ul class="chips">
+      <li>PHP</li><li>JavaScript</li><li>HTML</li><li>CSS</li><li>Bootstrap</li><li>Raspberry Pi</li><li>Hostinger VPS</li><li>YOLOv8</li><li>Python</li><li>Google Colab</li><li>Roboflow</li>
+    </ul>
+    <p style="font-size:.95rem;color:var(--muted)">Model training: YOLOv8 in Python on Google Colab, with images annotated in Roboflow.</p>
+  </article></div>
+</div></section>
+
+<section id="video"><div class="sec" style="--c:var(--video)">
+  <header><h2>Video editing</h2><p>Comfortable in both CapCut and Adobe Premiere.</p></header>
+  <div class="stack"><div class="videos">
+    <article class="card">
+      <a class="thumb" href="#REPLACE-WITH-CAPCUT-VIDEO-LINK" target="_blank" rel="noopener" aria-label="Watch the CapCut edit"><span></span></a>
+      <h3>Edited in CapCut</h3>
+      <p>Replace this line with a short description of the video.</p>
+      <a class="btn" href="#REPLACE-WITH-CAPCUT-VIDEO-LINK" target="_blank" rel="noopener">Watch video</a>
+    </article>
+    <article class="card">
+      <a class="thumb" href="#REPLACE-WITH-PREMIERE-VIDEO-LINK" target="_blank" rel="noopener" aria-label="Watch the Adobe Premiere edit"><span></span></a>
+      <h3>Edited in Adobe Premiere</h3>
+      <p>Replace this line with a short description of the video.</p>
+      <a class="btn" href="#REPLACE-WITH-PREMIERE-VIDEO-LINK" target="_blank" rel="noopener">Watch video</a>
+    </article>
+  </div></div></div>
+</div></section>
+
+<section id="automation"><div class="sec" style="--c:var(--auto)">
+  <header><h2>Workflow automation</h2><p>Routine inbox and chat work that runs without you.</p></header>
+  <div class="stack">
+    <article class="card">
+      <h3>Gmail Email Autoresponder</h3>
+      <p>A general-purpose auto-responder for Gmail. It looks up product and business details in a knowledge base, then uses a Gemini model to write the reply.</p>
+      <p><strong>Useful for:</strong> businesses and teams that answer the same customer emails every day.</p>
+      <ul class="chips"><li>n8n</li><li>Gmail</li><li>Knowledge base</li><li>Gemini</li></ul>
+    </article>
+    <article class="card wip">
+      <h3>OJT Automation System <span class="badge">In progress</span></h3>
+      <p>A Facebook chatbot that lets OJT students complete their requirements inside Messenger.</p><p><strong>Useful for:</strong> schools, offices and teams that handle repeat requests and paperwork in chat.</p>
+      <div class="bar" role="img" aria-label="Project is partially complete"><i></i></div>
+      <ul class="tasks">
+        <li>Register as an OJT student</li><li>Submit files</li><li>Ask frequently asked questions</li><li>Check submission status</li>
+      </ul>
+      <ul class="chips" style="margin-top:16px"><li>n8n</li><li>Facebook Messenger</li></ul>
+    </article>
+  </div>
+</div></section>
+</main>
+
+<footer id="contact"><div class="wrap">
+  <h2>Need a tech VA?</h2>
+  <p>Tell me which tasks eat your time, and I'll tell you what I can automate or take over.</p>
+  <a class="btn" style="--c:var(--ink)" href="mailto:clarcjae@gmail.com">Email me at clarcjae@gmail.com</a>
+</div></footer>
+</body>
+</html>
